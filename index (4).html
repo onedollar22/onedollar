@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>One Dollar — Support people living with cancer</title>
+<meta name="description" content="A global campaign: at least $1 each, together we support people living with cancer. Crypto donations, verifiable on-chain.">
+<meta property="og:title" content="One Dollar. A million hands.">
+<meta property="og:description" content="Give $1 in crypto to support people living with cancer. Every address is verifiable on-chain.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎗️</text></svg>">
+<style>
+:root{
+  --bg:#f8f5fc;--card:#fff;--ink:#1d1630;--mute:#5f5873;--line:#e0d8ee;--acc:#c2255c;--acc2:#6c3fd1;--soft:#f0e9fb;--ok:#177a4a;--bad:#b3261e;
+  --fd:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Noto Naskh Arabic","Geeza Pro",serif;
+  --fb:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Arabic",Tahoma,sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#130e22;--card:#1c1530;--ink:#f3eefc;--mute:#b0a6c8;--line:#34294f;--acc:#ff6b9d;--acc2:#a98bff;--soft:#241b3d;--ok:#5fd39a;--bad:#ff8a80}}
+:root[data-theme="dark"]{--bg:#130e22;--card:#1c1530;--ink:#f3eefc;--mute:#b0a6c8;--line:#34294f;--acc:#ff6b9d;--acc2:#a98bff;--soft:#241b3d;--ok:#5fd39a;--bad:#ff8a80}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.7 var(--fb);-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+:focus-visible{outline:3px solid var(--acc2);outline-offset:3px;border-radius:6px}
+a{color:var(--acc2)}
+.w{max-width:1040px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+h2{font-size:clamp(1.8rem,4.5vw,2.7rem)}
+h3{font-size:1.25rem}
+p{margin:0 0 1em;max-width:60ch}
+section{padding:76px 0}
+.mute{color:var(--mute)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:12px}
+.logo{font:700 1.2rem var(--fd);text-decoration:none;color:var(--ink)}
+.tools{display:flex;gap:8px;align-items:center}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 15px;font:500 .9rem var(--fb);cursor:pointer;text-decoration:none}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:15px 30px;font:700 1.05rem var(--fb);text-decoration:none;cursor:pointer}
+.btn.alt{background:none;color:var(--ink);border:1.5px solid var(--ink)}
+.btn:hover{opacity:.88}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;padding:30px 0 50px}
+.hero h1{font-size:clamp(3rem,8.5vw,6rem);margin-bottom:.25em}
+.hero p{font-size:1.2rem;color:var(--mute)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+#rib{width:100%;aspect-ratio:5/6;display:block;touch-action:pan-y}
+@media(max-width:800px){.hero{grid-template-columns:1fr}#rib{max-width:360px;margin:0 auto;order:-1}}
+
+/* facts */
+.facts{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.fact{border-top:3px solid var(--acc);padding-top:14px}
+.fact b{font:700 1.5rem var(--fd);display:block;margin-bottom:6px}
+.steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;counter-increment:s}
+.step::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--acc);color:#fff;font:700 1.1rem var(--fd);margin-bottom:12px}
+
+/* wallets */
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.wal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.wal header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.wal h3{margin:0}
+.net{font-size:.82rem;color:var(--mute);border:1px solid var(--line);border-radius:6px;padding:1px 9px}
+.addr{direction:ltr;text-align:left;font:500 .92rem/1.55 ui-monospace,Menlo,Consolas,monospace;word-break:break-all;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:11px}
+.addr b{color:var(--acc);font-weight:700}
+.addr.un{color:var(--bad)}
+.row{display:flex;gap:8px}
+.row button,.row a{flex:1;text-align:center;border:1px solid var(--line);background:none;color:var(--ink);border-radius:10px;padding:9px 6px;font:600 .92rem var(--fb);cursor:pointer;text-decoration:none}
+.row .cp{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row button:disabled{opacity:.4;cursor:not-allowed}
+.art{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.art .ic{font-size:1.8rem;display:block;margin-bottom:6px}.art h3{margin-bottom:.3em}
+.art summary{list-style:none;cursor:pointer}.art summary::-webkit-details-marker{display:none}
+.art summary b{font:700 .92rem var(--fb);color:var(--acc2)}
+.art p{margin:.7em 0 0;color:var(--mute);max-width:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--acc2);border-radius:999px;padding:6px 16px;font:700 .95rem var(--fb);margin:0 0 18px}
+.rb{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));margin-top:26px}
+.rb figure{margin:0;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 8px 12px}
+.rb svg{width:54px;height:64px;display:block;margin:0 auto 8px;transition:transform .3s}
+.rb figure:hover svg{transform:translateY(-4px) rotate(-6deg)}
+.rb figcaption{font:600 .9rem/1.3 var(--fb)}
+.qr{display:none;justify-content:center;background:#fff;border-radius:12px;padding:12px}
+.qr.on{display:flex}.qr svg{width:180px;height:180px}
+.small{font-size:.86rem;color:var(--mute);margin:0}
+.note{background:var(--soft);border-inline-start:5px solid var(--acc2);border-radius:10px;padding:14px 18px;margin:0 0 22px}
+.note p{margin:0;max-width:none}
+
+/* security */
+.sec{background:var(--soft)}
+.fp{direction:ltr;text-align:left;font:600 1.15rem/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;word-break:break-all;margin:14px 0}
+.cols{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.cols li{margin-bottom:8px}
+
+/* badge */
+.badge{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+@media(max-width:800px){.badge{grid-template-columns:1fr}}
+#bc{width:100%;max-width:380px;border-radius:18px;border:1px solid var(--line);display:block;margin:auto}
+input[type=text]{width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:500 1rem var(--fb);margin:6px 0 14px}
+label{font-weight:600}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{font:700 1.15rem var(--fd);cursor:pointer}
+details p{margin:10px 0 0}
+footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--mute);font-size:.9rem}
+.toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--ink);color:var(--bg);padding:11px 22px;border-radius:999px;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none;z-index:9}
+.toast.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="w">
+<nav>
+  <a class="logo" href="#top">🎗️ <span data-t="logo"></span></a>
+  <div class="tools">
+    <a class="pill" href="#learn" data-t="navL"></a><a class="pill" href="#give" data-t="navG"></a>
+    <button class="pill" id="lang" type="button">العربية</button>
+    <button class="pill" id="theme" type="button" aria-label="Toggle theme">◐</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div>
+    <span class="eyebrow">🎗️ <span data-t="eye"></span></span>
+    <h1 data-t="h1"></h1>
+    <p data-t="sub"></p>
+    <div class="cta"><a class="btn" href="#give" data-t="cta1"></a></div>
+  </div>
+  <canvas id="rib" role="img" aria-label="A ribbon made of many small dots, each dot one person giving one dollar"></canvas>
+</header>
+</div>
+
+<section style="padding-top:10px"><div class="w">
+  <div class="facts">
+    <div class="fact"><b data-t="f1h"></b><p data-t="f1p"></p></div>
+    <div class="fact"><b data-t="f2h"></b><p data-t="f2p"></p></div>
+    <div class="fact"><b data-t="f3h"></b><p data-t="f3p"></p></div>
+  </div>
+</div></section>
+
+<section id="ribbons" style="padding-top:20px"><div class="w">
+  <h2 data-t="rh"></h2><p data-t="rp"></p>
+  <div class="rb" id="rb"></div>
+</div></section>
+
+<section id="how" style="padding-top:20px"><div class="w">
+  <h2 data-t="howh"></h2>
+  <div class="steps">
+    <div class="step"><h3 data-t="s1h"></h3><p class="mute" data-t="s1p"></p></div>
+    <div class="step"><h3 data-t="s2h"></h3><p class="mute" data-t="s2p"></p></div>
+    <div class="step"><h3 data-t="s3h"></h3><p class="mute" data-t="s3p"></p></div>
+  </div>
+</div></section>
+
+<section id="give"><div class="w">
+  <h2 data-t="giveh"></h2>
+  <div class="note"><p data-t="fee"></p></div>
+  <div class="grid" id="wallets"></div>
+  <p class="small" style="margin-top:16px" data-t="verify"></p>
+</div></section>
+
+
+<section id="learn"><div class="w">
+  <h2 data-t="lh"></h2><p data-t="lp"></p>
+  <div class="grid" id="arts"></div>
+  <p class="small" style="margin-top:18px" data-t="med"></p>
+</div></section>
+
+<section id="badge"><div class="w badge">
+  <div>
+    <h2 data-t="bh"></h2>
+    <p data-t="bp"></p>
+    <label for="nm" data-t="bl"></label>
+    <input id="nm" type="text" maxlength="24" autocomplete="off">
+    <div class="cta" style="margin-top:0"><button class="btn" id="share" type="button" data-t="bshare"></button><button class="btn alt" id="dl" type="button" data-t="bdl"></button></div>
+  </div>
+  <canvas id="bc" width="1080" height="1350"></canvas>
+</div></section>
+
+<section style="padding-top:0"><div class="w">
+  <h2 data-t="qh"></h2>
+  <details><summary data-t="q1"></summary><p data-t="a1"></p></details>
+  <details><summary data-t="q2"></summary><p data-t="a2"></p></details>
+  <details><summary data-t="q3"></summary><p data-t="a3"></p></details>
+  <details><summary data-t="q4"></summary><p data-t="a4"></p></details>
+  <details><summary data-t="q5"></summary><p data-t="a5"></p></details>
+</div></section>
+
+<footer><div class="w"><p data-t="foot"></p></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1})},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});</script>
+<script>
+/* Wallet addresses (the only thing you may ever need to edit) */
+const CONFIG = {
+  wallets: [
+    {name:"Bitcoin",  sym:"BTC",  net:"Bitcoin",           addr:"bc1qu3anwul43hypva2hzplmpf38xp45av3dmz3jkv", uri:"bitcoin:",  ex:"https://www.blockchain.com/explorer/addresses/btc/"},
+    {name:"USDT",     sym:"USDT", net:"TRON (TRC20)",      addr:"TMM1Upr7bJvM2x7XpCT3w2SsP8Aro1uDpu",         uri:"",          ex:"https://tronscan.org/#/address/"},
+    {name:"USDT",     sym:"USDT", net:"BNB Chain (BEP20)", addr:"0xb141442eB8D35fe6B2c84B46472346F892D06D0b", uri:"",          ex:"https://bscscan.com/address/"},
+    {name:"Ethereum", sym:"ETH",  net:"Ethereum",          addr:"0xb141442eB8D35fe6B2c84B46472346F892D06D0b", uri:"ethereum:", ex:"https://etherscan.io/address/"},
+    {name:"Dogecoin (BEP20)", sym:"DOGE", net:"BNB Chain (BEP20)", addr:"0xb141442eB8D35fe6B2c84B46472346F892D06D0b", uri:"", ex:"https://bscscan.com/address/"}
+  ]
+};
+/* ======================================================== */
+
+const T = {
+en:{eye:"Supporting people living with cancer",rh:"Every cancer. Every person.",rp:"Cancer is not one disease, and every ribbon colour stands for people with a face, a family and a name. These are some of the colours commonly used worldwide; exact colours can vary by country and organisation.",navL:"Learn",navG:"Give",verify:"Every address above is public. Use the explorer link on each card to see activity on the blockchain, and always compare the first and last characters (in colour) before you confirm.",lh:"Know more. Share more.",lp:"Short, plain-language guides on cancer: awareness, prevention, and how to be there for someone.",med:"General information only. It is not medical advice. If you are worried about your health, please see a doctor.",more:"Read more",foot:"Donations are voluntary and cannot be reversed. This page provides general information, not medical or financial advice.",logo:"One Dollar",h1:"One dollar.<br>A million hands.",sub:"Nobody has to give much. If enough of us each give $1, people living with cancer get real, practical support. Start with yours.",cta1:"Give $1",cta2:"Verify before you give",
+f1h:"$1 is enough",f1p:"There is no maximum and no pressure. $1 is simply the smallest gift that still counts, and it means anyone in the world can join.",
+f2h:"Crypto crosses borders",f2p:"No bank, no card, no middleman holding your gift. It works from any country, at any hour.",
+f3h:"Everything is checkable",f3p:"Every address is public. You can open it on a blockchain explorer and see what came in and what went out.",
+howh:"How it works",s1h:"Choose a coin",s1p:"Pick the network that suits you. For small amounts we suggest USDT or DOGE, because fees are low.",
+s2h:"Send $1 or more",s2p:"Copy the address or scan the QR code, then send. Double-check the network before you confirm.",
+s3h:"Check it on-chain",s3p:"Open the explorer link on the card and see your gift arrive. Nothing here relies on trust alone.",
+giveh:"Give in crypto",fee:"Tip: fees on Bitcoin and Ethereum can be higher than $1. To make sure the full dollar arrives, choose USDT (TRC20 or BEP20) or Dogecoin.",
+copy:"Copy address",qr:"QR code",ex:"View on explorer",net:"Send {sym} on the {net} network only. Other networks can lose funds.",unset:"Address not set yet",copied:"Address copied",manual:"Select and copy the address manually",
+trh:"Safe by design",trp:"This site is a single static page, and the wallet addresses are written in its code. This is the fingerprint of all addresses on this page. It should match what we publish on our other official channels. If it differs, do not send anything.",
+fpl:"Fingerprint (SHA-256)",fpu:"Set your addresses to generate the fingerprint.",
+c1h:"Before you send",c1a:"Compare the first and last 6 characters (shown in colour) with our official channels.",c1b:"Open the explorer link and confirm the address has real history.",c1c:"Send a small test first if the amount is large.",
+c2h:"What protects this page",c2a:"No third-party scripts, fonts or trackers load here.",c2b:"A strict security policy blocks any outside connection.",c2c:"The full source code is public and every change is recorded.",
+c3h:"Who is behind this",
+bh:"Make your $1 badge",bp:"Created in your browser, never uploaded. Share it so a friend gives theirs too.",bl:"Your name or nickname (optional)",bshare:"Share badge",bdl:"Download PNG",
+bname:"gave $1",bcap:"Join us. One dollar each.",sharetxt:"I gave $1 to support people living with cancer. Join me:",
+qh:"Questions",
+q1:"Why only $1?",a1:"Because small gifts add up and nobody is excluded. You are welcome to give more. $1 is just the doorway.",
+q2:"Why crypto?",a2:"It reaches people in any country without banks or card networks, and anyone can audit the wallets publicly.",
+q3:"Can I get a refund?",a3:"Crypto transfers cannot be reversed, so please check the address and network carefully before sending.",
+q4:"Is my donation tax-deductible?",a4:"This depends on your country and on the legal status of the organisation receiving funds. We do not issue tax receipts unless stated on this page.",
+q5:"How do I know this page is genuine?",a5:"Only open it from our official links, compare the fingerprint with our other channels, and check the addresses on a blockchain explorer.",
+foot:"Donations are voluntary and non-refundable. This page does not provide medical or financial advice. Open source: "},
+ar:{eye:"ندعم من يعيشون مع السرطان",rh:"كل سرطان. كل إنسان.",rp:"السرطان ليس مرضًا واحدًا، ولكل لون شريط ناسٌ لهم وجوه وعائلات وأسماء. هذه بعض الألوان الشائعة عالميًا، وقد تختلف الألوان قليلًا بين بلد وجهة.",navL:"تعرّف",navG:"تبرّع",verify:"كل العناوين أعلاه علنية. استخدم رابط المستكشف في كل بطاقة لتشاهد الحركة على البلوكتشين، وقارن دائمًا أول وآخر خانات العنوان (الملونة) قبل التأكيد.",lh:"اعرف أكثر. شارك أكثر.",lp:"أدلة قصيرة وبلغة بسيطة عن السرطان: التوعية، والوقاية، وكيف تقف إلى جانب من تحب.",med:"معلومات عامة فقط وليست نصيحة طبية. إن كنت قلقًا على صحتك فراجع طبيبًا.",more:"اقرأ المزيد",foot:"التبرعات طوعية ولا يمكن عكسها. تقدّم هذه الصفحة معلومات عامة وليست نصيحة طبية أو مالية.",logo:"دولار واحد",h1:"دولار واحد.<br>مليون يد.",sub:"لا أحد مطالَب بالكثير. إذا قدّم كل واحد منا دولارًا فقط، يصل دعم حقيقي وعملي لمن يعيشون مع السرطان. ابدأ بدولارك.",cta1:"تبرّع بدولار",cta2:"تحقّق قبل أن تتبرع",
+f1h:"دولار واحد يكفي",f1p:"لا حد أعلى ولا ضغط. الدولار هو أصغر تبرع ما زال يُحتسب، ويتيح لأي شخص في العالم أن يشارك.",
+f2h:"العملات المشفرة بلا حدود",f2p:"بلا بنك ولا بطاقة ولا وسيط يمسك تبرعك. تعمل من أي بلد وفي أي ساعة.",
+f3h:"كل شيء قابل للتحقق",f3p:"كل العناوين علنية. افتحها على مستكشف البلوكتشين وشاهد ما دخل وما خرج.",
+howh:"كيف تعمل الفكرة",s1h:"اختر عملة",s1p:"اختر الشبكة المناسبة. للمبالغ الصغيرة ننصح بـ USDT أو DOGE لأن رسومها منخفضة.",
+s2h:"أرسل دولارًا أو أكثر",s2p:"انسخ العنوان أو امسح رمز QR ثم أرسل. تأكد من الشبكة قبل التأكيد.",
+s3h:"تحقّق على البلوكتشين",s3p:"افتح رابط المستكشف في البطاقة وشاهد تبرعك يصل. لا شيء هنا يعتمد على الثقة وحدها.",
+giveh:"تبرّع بالعملات المشفرة",fee:"نصيحة: رسوم بيتكوين وإيثيريوم قد تفوق دولارًا. لتصل قيمة الدولار كاملة اختر USDT (TRC20 أو BEP20) أو Dogecoin.",
+copy:"نسخ العنوان",qr:"رمز QR",ex:"عرض على المستكشف",net:"أرسل {sym} عبر شبكة {net} فقط. الشبكات الأخرى قد تُضيّع المبلغ.",unset:"لم يُضبط العنوان بعد",copied:"تم نسخ العنوان",manual:"حدّد العنوان وانسخه يدويًا",
+trh:"آمنة بالتصميم",trp:"هذا الموقع صفحة ثابتة واحدة وعناوين المحافظ مكتوبة في كودها. هذه بصمة كل العناوين في هذه الصفحة، ويجب أن تطابق ما ننشره في قنواتنا الرسمية الأخرى. إن اختلفت فلا ترسل شيئًا.",
+fpl:"البصمة (SHA-256)",fpu:"ضع عناوينك لتظهر البصمة.",
+c1h:"قبل أن ترسل",c1a:"قارن أول 6 وآخر 6 خانات (الملونة) مع قنواتنا الرسمية.",c1b:"افتح رابط المستكشف وتأكد أن للعنوان سجلًا حقيقيًا.",c1c:"أرسل مبلغًا تجريبيًا صغيرًا أولًا إذا كان المبلغ كبيرًا.",
+c2h:"ما الذي يحمي الصفحة",c2a:"لا سكربتات ولا خطوط ولا أدوات تتبّع من أطراف خارجية.",c2b:"سياسة أمان صارمة تمنع أي اتصال خارجي.",c2c:"الكود المصدري علني وكل تعديل مسجّل.",
+c3h:"من وراء الحملة",
+bh:"اصنع شارة دولارك",bp:"تُنشأ داخل متصفحك ولا تُرفع إلى أي مكان. شاركها ليتبرع صديق بدوره.",bl:"اسمك أو لقبك (اختياري)",bshare:"مشاركة الشارة",bdl:"تنزيل PNG",
+bname:"تبرّع بدولار",bcap:"انضم إلينا. دولار من كل شخص.",sharetxt:"تبرعت بدولار لدعم من يعيشون مع السرطان. انضم إليّ:",
+qh:"أسئلة شائعة",
+q1:"لماذا دولار واحد فقط؟",a1:"لأن الهدايا الصغيرة تتراكم ولا أحد يُستبعد. يمكنك التبرع بأكثر، والدولار مجرد الباب.",
+q2:"لماذا العملات المشفرة؟",a2:"تصل لأي بلد دون بنوك أو شبكات بطاقات، ويستطيع أي شخص تدقيق المحافظ علنًا.",
+q3:"هل أستطيع استرداد المبلغ؟",a3:"تحويلات العملات المشفرة لا تُعكس، لذا تحقق جيدًا من العنوان والشبكة قبل الإرسال.",
+q4:"هل التبرع معفى من الضريبة؟",a4:"يعتمد ذلك على بلدك والوضع القانوني للجهة المستلمة. لا نصدر إيصالات ضريبية ما لم يُذكر ذلك في هذه الصفحة.",
+q5:"كيف أعرف أن الصفحة أصلية؟",a5:"افتحها من روابطنا الرسمية فقط، وقارن البصمة بقنواتنا الأخرى، وتحقق من العناوين على مستكشف البلوكتشين.",
+foot:"التبرعات طوعية وغير قابلة للاسترداد. هذه الصفحة لا تقدم نصيحة طبية أو مالية. المصدر المفتوح: "}
+};
+
+const $=s=>document.querySelector(s), root=document.documentElement;
+let L = (localStorage.getItem('l')||'')||(navigator.language||'en').slice(0,2)==='ar'?'ar':'en';
+try{ L = localStorage.getItem('l') || L }catch(e){}
+const t=k=>T[L][k];
+const toast=m=>{const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),1800)};
+const unset=a=>/^PUT_/.test(a);
+
+/* ---- dots shaped like an awareness ribbon (shared by hero + badge) ---- */
+const PAL=['#ff5c8a','#b388ff','#ffc23d','#2ec4b6','#ff8a3d','#5aa9ff'];
+const RIB=(()=>{
+  const m=document.createElement('canvas');m.width=100;m.height=120;const c=m.getContext('2d');
+  c.lineWidth=15;c.lineCap='round';c.lineJoin='round';
+  c.stroke(new Path2D('M50 12C20 12 20 50 50 64C80 50 80 12 50 12Z'));
+  c.beginPath();c.moveTo(50,64);c.lineTo(25,112);c.moveTo(50,64);c.lineTo(75,112);c.stroke();
+  const d=c.getImageData(0,0,100,120).data,pts=[];
+  for(let y=0;y<120;y+=3)for(let x=0;x<100;x+=3)if(d[(y*100+x)*4+3]>140)pts.push({x:x/100,y:y/120,c:PAL[(Math.floor(x/3)+Math.floor(y/3)*2)%PAL.length]});
+  return pts;
+})();
+function drawRib(ctx,x0,y0,W,H,r,prog,mx,my){
+  const s=Math.min(W/100,H/120),ox=x0+(W-100*s)/2,oy=y0+(H-120*s)/2;
+  for(const p of RIB){
+    const k=Math.min(1,Math.max(0,prog*2.2-p.y*1.2)); if(k<=0)continue;
+    let x=ox+p.x*100*s,y=oy+p.y*120*s;
+    if(mx!=null){const dx=x-mx,dy=y-my,d=Math.hypot(dx,dy),R=W*.18;if(d<R){const f=(1-d/R)*s*7;x+=dx/d*f;y+=dy/d*f}}
+    ctx.globalAlpha=k;ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(x,y,r*s*k,0,6.283);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+}
+(function hero(){
+  const cv=$('#rib'),ctx=cv.getContext('2d');let W,H,mx=null,my=null,t0=performance.now();
+  const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){const d=devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0)}
+  function frame(now){
+    const p=rm?1:Math.min(1,(now-t0)/2400);ctx.clearRect(0,0,W,H);
+    const br=1+(rm?0:Math.sin(now/900)*.06);
+    drawRib(ctx,0,0,W,H,1.05*br,1-Math.pow(1-p,3),mx,my);requestAnimationFrame(frame);
+  }
+  addEventListener('resize',size);size();
+  cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+  cv.addEventListener('pointerleave',()=>{mx=my=null});
+  requestAnimationFrame(frame);
+})();
+
+/* ---- wallets ---- */
+const strong=a=>a.length>14?`<b>${a.slice(0,6)}</b>${a.slice(6,-6)}<b>${a.slice(-6)}</b>`:a;
+function buildWallets(){
+  const g=$('#wallets');g.innerHTML='';
+  CONFIG.wallets.forEach(w=>{
+    const u=unset(w.addr),el=document.createElement('article');el.className='wal';
+    el.innerHTML=`<header><h3>${w.name}</h3><span class="net">${w.net}</span></header>
+    <div class="addr ${u?'un':''}">${u?t('unset'):strong(w.addr)}</div><div class="qr"></div>
+    <div class="row"><button class="cp" ${u?'disabled':''}>${t('copy')}</button><button class="q" ${u?'disabled':''}>${t('qr')}</button>${u?'':`<a href="${w.ex}${encodeURIComponent(w.addr)}" target="_blank" rel="noopener noreferrer">${t('ex')}</a>`}</div>
+    <p class="small">${t('net').replace('{sym}',w.sym).replace('{net}',w.net)}</p>`;
+    el.querySelector('.cp').onclick=async()=>{try{await navigator.clipboard.writeText(w.addr);toast(t('copied'))}catch(e){toast(t('manual'))}};
+    el.querySelector('.q').onclick=()=>{const q=el.querySelector('.qr');if(!q.innerHTML){const o=qrcode(0,'M');o.addData(w.uri+w.addr);o.make();q.innerHTML=o.createSvgTag({cellSize:5,margin:0,scalable:true})}q.classList.toggle('on')};
+    g.appendChild(el);
+  });
+}
+
+const ART=[{"i": "🔎", "t": {"en": "Early detection can change the outcome", "ar": "الكشف المبكر قد يغيّر النتيجة"}, "p": {"en": ["Many cancers are easier to treat when they are found early. Screening tests exist for several types, including breast, cervical and colorectal cancer, and for some high-risk groups, lung cancer. Recommended ages and schedules differ between countries, so ask your doctor what applies to you.", "Know what is normal for your body. See a doctor if you notice a lump that does not go away, unexplained weight loss, a cough or hoarseness that lasts for weeks, blood in stool or urine, unusual bleeding, or a sore that does not heal. Most of these have other causes, but they deserve to be checked."], "ar": ["كثير من السرطانات يسهل علاجها حين تُكتشف مبكرًا. توجد فحوص كشف لعدة أنواع منها سرطان الثدي وعنق الرحم والقولون، ولبعض الفئات الأعلى خطرًا سرطان الرئة. تختلف الأعمار والمواعيد الموصى بها من بلد لآخر، فاسأل طبيبك عمّا يناسبك.", "اعرف ما هو طبيعي في جسمك. راجع الطبيب إذا لاحظت كتلة لا تزول، أو نزول وزن بلا سبب، أو سعالًا أو بحّة تستمر أسابيع، أو دمًا في البراز أو البول، أو نزيفًا غير معتاد، أو جرحًا لا يلتئم. أغلبها له أسباب أخرى، لكنها تستحق الفحص."]}}, {"i": "🤝", "t": {"en": "How to support someone with cancer", "ar": "كيف تدعم شخصًا مصابًا بالسرطان"}, "p": {"en": ["Listen more than you advise. Many people with cancer say that being heard matters more than being given solutions. Avoid unsolicited medical tips and pressure to stay positive; it is fine to sit with difficult feelings.", "Offer specific help instead of a general “let me know”: cooking a meal, driving to an appointment, looking after children, handling a task. And keep showing up. Support is often most scarce after the first weeks."], "ar": ["استمع أكثر مما تنصح. كثيرون ممن مروا بالسرطان يقولون إن الإصغاء إليهم أهم من تقديم الحلول. تجنّب النصائح الطبية غير المطلوبة والضغط عليهم بالتفاؤل، فلا بأس بالجلوس مع المشاعر الصعبة.", "اعرض مساعدة محددة بدل عبارة عامة مثل «أخبرني إن احتجت»: وجبة، أو توصيلة إلى موعد، أو رعاية الأطفال، أو إنجاز مهمة. واستمر في الحضور، فالدعم يقلّ غالبًا بعد الأسابيع الأولى."]}}, {"i": "💸", "t": {"en": "The costs people do not see", "ar": "التكاليف التي لا يراها الناس"}, "p": {"en": ["Treatment is more than medicine. Families often face travel to distant hospitals, time off work, extra care at home, special food and the cost of simply getting through each week. Researchers call this the financial burden of cancer, and it affects people in many countries, including those with insurance.", "This is why small, practical help matters. A gift does not need to be large to be part of something bigger when many people give together."], "ar": ["العلاج ليس دواءً فقط. فالعائلات تواجه غالبًا السفر إلى مستشفيات بعيدة، والغياب عن العمل، والرعاية الإضافية في البيت، والغذاء الخاص، وتكلفة تجاوز كل أسبوع. يسمّي الباحثون هذا العبء المالي للسرطان، وهو يمس الناس في بلدان كثيرة حتى من لديهم تأمين.", "لهذا يهمّ الدعم الصغير العملي. لا يلزم أن يكون التبرع كبيرًا ليصير جزءًا من شيء أكبر حين يجتمع كثيرون."]}}, {"i": "✅", "t": {"en": "Myths and facts", "ar": "خرافات وحقائق"}, "p": {"en": ["Myth: cancer is contagious. Fact: you cannot catch cancer from someone. Myth: cancer only affects older people. Fact: it can occur at any age, although risk rises with age.", "Myth: a special diet or supplement can cure cancer. Fact: no diet replaces medical treatment, and a balanced diet is best seen as support during care. Myth: a diagnosis is always a death sentence. Fact: survival has improved for many cancers thanks to earlier detection and better treatment."], "ar": ["خرافة: السرطان معدٍ. الحقيقة: لا يمكنك أن تصاب بالسرطان من شخص آخر. خرافة: السرطان يصيب كبار السن فقط. الحقيقة: قد يحدث في أي عمر، وإن كان الخطر يزداد مع التقدم في السن.", "خرافة: نظام غذائي أو مكمّل معيّن يشفي السرطان. الحقيقة: لا يغني أي نظام غذائي عن العلاج الطبي، والغذاء المتوازن عون أثناء العلاج. خرافة: التشخيص حكم بالموت دائمًا. الحقيقة: تحسّنت نسب البقاء على قيد الحياة في كثير من السرطانات بفضل الكشف المبكر وتطوّر العلاج."]}}, {"i": "🛡️", "t": {"en": "Lowering your risk", "ar": "كيف تقلّل خطر الإصابة"}, "p": {"en": ["No one can remove risk completely, but some habits help: do not smoke, limit alcohol, stay physically active, keep a healthy weight, and protect your skin from strong sun.", "Vaccines also play a role. The HPV vaccine helps prevent cervical and some other cancers, and the hepatitis B vaccine reduces the risk of liver cancer. Ask your doctor or local health service which are available to you."], "ar": ["لا أحد يستطيع إزالة الخطر كليًا، لكن بعض العادات تساعد: لا تدخّن، وقلّل الكحول، وحافظ على نشاطك البدني ووزن صحي، واحمِ بشرتك من الشمس القوية.", "وللّقاحات دور أيضًا. يساعد لقاح فيروس الورم الحليمي (HPV) في الوقاية من سرطان عنق الرحم وبعض السرطانات الأخرى، ويقلل لقاح التهاب الكبد B خطر سرطان الكبد. اسأل طبيبك أو الجهة الصحية المحلية عمّا هو متاح لك."]}}];
+function buildArts(){
+  const g=$('#arts');g.innerHTML='';
+  ART.forEach(a=>{
+    const d=document.createElement('details');d.className='art';
+    const sm=document.createElement('summary'),ic=document.createElement('span'),h=document.createElement('h3'),b=document.createElement('b');
+    ic.className='ic';ic.textContent=a.i;h.textContent=a.t[L];b.textContent=t('more')+' →';sm.append(ic,h,b);d.appendChild(sm);
+    a.p[L].forEach(x=>{const p=document.createElement('p');p.textContent=x;d.appendChild(p)});g.appendChild(d);
+  });
+}
+const RIBS=[["#f06ca5","Breast","الثدي"],["#f2b705","Childhood cancers","سرطان الأطفال"],["#6bb7f2","Prostate","البروستات"],["#f28c28","Leukaemia","سرطان الدم"],["#2bb5a6","Ovarian","المبيض"],["#2f4fa8","Colorectal","القولون والمستقيم"],["#c9c3d6","Lung","الرئة"],["#8fc93a","Lymphoma","الغدد اللمفاوية"],["#a58cf0","All cancers","كل السرطانات"]];
+function buildRibbons(){
+  const g=$('#rb');g.innerHTML='';
+  RIBS.forEach(r=>{
+    const f=document.createElement('figure');
+    f.innerHTML=`<svg viewBox="0 0 100 120" aria-hidden="true" fill="none" stroke="${r[0]}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M50 12C20 12 20 50 50 64C80 50 80 12 50 12Z"/><path d="M50 64L25 108M50 64L75 108"/></svg><figcaption></figcaption>`;
+    f.querySelector('figcaption').textContent=L==='ar'?r[2]:r[1];g.appendChild(f);
+  });
+}
+/* ---- badge ---- */
+function badge(){
+  const cv=$('#bc'),c=cv.getContext('2d'),dark=matchMedia('(prefers-color-scheme:dark)').matches&&root.dataset.theme!=='light'||root.dataset.theme==='dark';
+  const g=c.createLinearGradient(0,0,0,1350);g.addColorStop(0,'#1d1630');g.addColorStop(1,'#3a1d4f');c.fillStyle=g;c.fillRect(0,0,1080,1350);
+  drawRib(c,140,90,800,760,1.1,1,null,null);
+  c.fillStyle='#fff';c.textAlign='center';const nm=$('#nm').value.trim();
+  c.font='700 150px Georgia,serif';c.fillText('$1',540,1030);
+  c.font='600 52px Georgia,serif';c.fillText((nm?nm+' ':'')+t('bname'),540,1110);
+  c.font='400 38px system-ui,sans-serif';c.fillStyle='#d9cdf3';c.fillText(t('bcap'),540,1190);
+  c.font='500 30px system-ui,sans-serif';c.fillText(location.host||'',540,1260);
+}
+const blob=()=>new Promise(r=>$('#bc').toBlob(r,'image/png'));
+$('#nm').addEventListener('input',badge);
+$('#dl').onclick=async()=>{const a=document.createElement('a');a.href=URL.createObjectURL(await blob());a.download='one-dollar-badge.png';a.click()};
+$('#share').onclick=async()=>{
+  const b=await blob(),f=new File([b],'badge.png',{type:'image/png'}),d={text:t('sharetxt'),url:location.href.split('#')[0],files:[f]};
+  try{ if(navigator.canShare&&navigator.canShare(d)) await navigator.share(d); else $('#dl').click(); }catch(e){}
+};
+
+/* ---- language / theme ---- */
+function apply(){
+  root.lang=L;root.dir=L==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-t]').forEach(e=>e.innerHTML=t(e.dataset.t));
+  $('#lang').textContent=L==='ar'?'English':'العربية';
+  document.querySelector('footer p').textContent=t('foot');
+  document.title=L==='ar'?'دولار واحد — ادعم مرضى السرطان':'One Dollar — Support people living with cancer';
+  $('#nm').placeholder=L==='ar'?'مثال: سارة':'e.g. Sara';
+  buildWallets();buildRibbons();buildArts();badge();
+}
+$('#lang').onclick=()=>{L=L==='ar'?'en':'ar';try{localStorage.setItem('l',L)}catch(e){}apply()};
+$('#theme').onclick=()=>{const d=matchMedia('(prefers-color-scheme:dark)').matches;const cur=root.dataset.theme||(d?'dark':'light');root.dataset.theme=cur==='dark'?'light':'dark'};
+apply();
+</script>
+</body>
+</html>
